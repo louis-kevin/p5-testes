@@ -6,17 +6,13 @@ function Walls() {
 
     this.update = function () {
         this.updateWalls();
-
         this.removeDeadWalls();
-
         this.checkQuantidadeWalls();
-
         this.tryCreateNewWall();
-
     };
 
     this.addWall = function () {
-        if(this.limitOfWalls > this.walls.length){
+        if (this.limitOfWalls > this.walls.length) {
             this.walls.push(new Wall());
         }
     };
@@ -30,7 +26,7 @@ function Walls() {
     this.updateWalls = function () {
         this.walls.forEach((wall, key) => {
             wall.update();
-            if (wall.isDead()) {
+            if (wall.isDead) {
                 this.taxaParaCriacaoDeNovasWalls += 0.1;
                 this.indexDeadWalls.push(key);
             } else if (this.taxaParaCriacaoDeNovasWalls > 0.3) {
@@ -40,7 +36,9 @@ function Walls() {
     };
 
     this.removeDeadWalls = function () {
-        this.indexDeadWalls.forEach((index) => this.walls.splice(index, 1));
+        this.indexDeadWalls.forEach((index) => {
+            this.walls.splice(index, 1)
+        });
         this.indexDeadWalls = [];
     };
 
@@ -53,9 +51,9 @@ function Walls() {
     this.tryCreateNewWall = function () {
         if (random(0, 1.5) < this.taxaParaCriacaoDeNovasWalls) {
             const lastWall = this.walls[this.walls.length - 1];
-            if(this.walls.length <=0){
+            if (this.walls.length <= 0) {
                 this.addWall();
-            }else if (lastWall.posicaoX < width * random(0.15, 0.5)) {
+            } else if (lastWall.posicaoX < width * random(0.15, 0.5)) {
                 this.addWall();
             }
         }

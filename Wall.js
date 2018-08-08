@@ -5,6 +5,8 @@ function Wall(){
     this.posicaoY = FLOOR_POS_Y - this.altura;
     this.posicaoX = width;
 
+    this.isDead = false;
+
     this.display = function(){
         fill(255, 153, 59);
         noStroke();
@@ -14,9 +16,10 @@ function Wall(){
     this.update = function () {
         this.posicaoX -= GAMESPEED;
         this.display();
+        this.checkIsDead();
     };
 
-    this.isDead = function () {
-        return this.posicaoX <= (this.largura*-1);
+    this.checkIsDead = function () {
+        this.isDead = this.posicaoX <= (this.largura*-1);
     }
 }

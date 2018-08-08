@@ -27,6 +27,7 @@ function draw() {
     player.update(walls.walls[0]);
 
     if(player.isDead){
+        player.isDead = false;
         walls.removeWalls();
     }
 
