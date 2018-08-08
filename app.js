@@ -5,7 +5,7 @@ let FLOOR_POS_Y;
 
 let floor;
 let player;
-let walls;
+let obstaculosHandler;
 
 
 function setup() {
@@ -13,22 +13,22 @@ function setup() {
     FLOOR_POS_Y = height*0.9;
     floor = new Floor();
     player = new Player();
-    walls = new Walls();
+    obstaculosHandler = new ObstaculosHandler();
 }
 
 function draw() {
-    // Set the background to black and turn off the fill color
+
     background(0);
 
     floor.display();
 
-    walls.update();
+    obstaculosHandler.update();
 
     player.update(walls.walls[0]);
 
     if(player.isDead){
         player.isDead = false;
-        walls.removeWalls();
+        obstaculosHandler.removeWalls();
     }
 
 }

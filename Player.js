@@ -16,14 +16,14 @@ function Player() {
         rect(this.posicaoX, this.posicaoY, this.largura, this.altura);
     };
 
-    this.update = function (wall) {
+    this.update = function (obstaculo) {
         this.checkTouchingFloor();
 
         this.applyGravity();
 
         this.display();
 
-        this.checkIsDead(wall);
+        this.checkIsDead(obstaculo);
 
     };
 
@@ -50,19 +50,23 @@ function Player() {
         this.applyGravity()
     };
 
-    this.checkIsDead = function(wall){
-        if(!wall){
+    this.checkIsDead = function(obstaculo){
+        if(!obstaculo){
             return;
         }
-        if(this.posicaoX + this.largura >= wall.posicaoX && this.posicaoX >= wall.posicaoX + wall.largura){
+        if(this.posicaoX + this.largura >= obstaculo.posicaoX && this.posicaoX >= obstaculo.posicaoX + obstaculo.largura){
            return;
         }
 
-        if(this.posicaoX + this.largura <= wall.posicaoX && this.posicaoX <= wall.posicaoX + wall.largura){
+        if(this.posicaoX + this.largura <= obstaculo.posicaoX && this.posicaoX <= obstaculo.posicaoX + obstaculo.largura){
             return;
         }
 
-        if(this.posicaoY + this.altura <= wall.posicaoY){
+        if(this.posicaoY + this.altura <= obstaculo.posicaoY && this.posicaoY <= obstaculo.posicaoY + obstaculo.altura){
+            return;
+        }
+
+        if(this.posicaoY + this.altura >= obstaculo.posicaoY && this.posicaoY >= obstaculo.posicaoY + obstaculo.altura){
             return;
         }
 
