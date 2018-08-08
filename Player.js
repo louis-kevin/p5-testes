@@ -10,8 +10,26 @@ function Player() {
 
     this.isDead = false;
 
+    this.distanciaObstaculo = width;
+    this.alturaObstaculo = 0;
+
+    this.output = 0;
+
+    this.distanciaDoPulo = random();
+
+    this.isBest = false;
+    this.isSecondBest = false;
+
+    this.score = 0;
+
     this.display = function () {
-        fill(255, 153, 59);
+        if(this.isBest){
+            fill(50, 205, 50);
+        }else if(this.isSecondBest){
+            fill(30,144,255);
+        }else{
+            fill(255, 153, 59);
+        }
         noStroke();
         rect(this.posicaoX, this.posicaoY, this.largura, this.altura);
     };
@@ -23,7 +41,15 @@ function Player() {
 
         this.display();
 
+        this.getDataObstaculo(obstaculo);
+
+        this.learn();
+
         this.checkIsDead(obstaculo);
+
+        if(!this.isDead){
+            this.score++;
+        }
 
     };
 
@@ -67,5 +93,54 @@ function Player() {
         }
 
         this.isDead = true;
+    }
+
+    this.getDataObstaculo = function(obstaculo){
+        this.distanciaObstaculo = dist(this.posicaoX + this.largura, this.posicaoY + this.altura, obstaculo.posicaoX, obstaculo.posicaoY)
+        this.alturaObstaculo = obstaculo.posicaoY;
+    }
+
+    this.startBrain = function(){
+        const { Layer, Network } = window.synaptic;
+
+        this.inputLayer = new Layer(3);
+        this.hiddenLayer = new Layer(3);
+        this.outputLayer = new Layer(1);
+
+        this.inputLayer.project(this.hiddenLayer);
+        this.hiddenLayer.project(this.outputLayer);
+
+        this.network = new Network({
+            input: this.inputLayer,
+            hidden: [this.hiddenLayer],
+            output: this.outputLayer
+        });
+    }
+
+    this.learn = function(){
+        let output = this.network.activate([
+            this.distanciaObstaculo, 
+            this.alturaObstaculo,
+            GAMESPEED
+        ]);
+
+        this.network.propagate(0.3, [this.distanciaObstaculo > this.distanciaDoPulo ? 0 : 1]);
+
+        this.output = output[0];
+        if(output[0] > 0.5){
+            this.jump();
+        }
+    }   
+
+    this.clone = function() {
+        var player = new Player();
+        player.distanciaDoPulo = this.distanciaDoPulo;
+        return player;
+    }
+
+    this.mutate = function(){
+        var player = new Player();
+        player.distanciaDoPulo = this.distanciaDoPulo;
+        return player;
     }
 }

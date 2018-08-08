@@ -12,6 +12,8 @@ function setup() {
     FLOOR_POS_Y = height*0.9;
     floor = new Floor();
     player = new Player();
+    player.startBrain();
+    frameRate(60);
     obstaculosHandler = new ObstaculosHandler();
 }
 
@@ -29,7 +31,6 @@ function draw() {
         player.isDead = false;
         obstaculosHandler.removeObstaculos();
     }
-
 }
 
 

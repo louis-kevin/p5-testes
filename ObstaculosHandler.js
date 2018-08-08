@@ -13,7 +13,8 @@ function ObstaculosHandler() {
 
     this.addObstaculo = function () {
         if (this.limitOfObstaculos > this.obstaculos.length) {
-            this.obstaculos.push(random(0, 1) > 0.5 ? new Wall() : new Bird());
+            // this.obstaculos.push(random(0, 1) > 0.5 ? new Wall() : new Bird());
+             this.obstaculos.push(new Wall());
         }
     };
 
