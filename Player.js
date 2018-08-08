@@ -54,8 +54,9 @@ function Player() {
         if(!wall){
             return;
         }
-        if(this.posicaoY + this.altura >= wall.posicaoY && this.posicaoX + this.largura >= wall.posicaoX){
-           this.isDead = true;
-        }
+        var testeA = this.posicaoY + this.altura >= wall.posicaoY && this.posicaoX + this.largura >= wall.posicaoX;
+        var testeB = this.posicaoY <= wall.posicaoY + wall.altura && this.posicaoX  <= wall.posicaoX + wall.altura;
+
+        this.isDead = testeA && testeB;
     }
 }

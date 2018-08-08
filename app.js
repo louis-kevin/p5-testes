@@ -28,7 +28,6 @@ function draw() {
 
     if(player.isDead){
         walls.removeWalls();
-        walls.addWall();
     }
 
 }
