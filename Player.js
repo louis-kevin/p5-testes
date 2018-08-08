@@ -138,7 +138,7 @@ function Player() {
         return player;
     }
 
-    this.mutate = function(){
+    this.mutate = function(player, mutationRate){
         var player = new Player();
         player.distanciaDoPulo = this.distanciaDoPulo;
         return player;
