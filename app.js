@@ -7,7 +7,6 @@ let floor;
 let player;
 let obstaculosHandler;
 
-
 function setup() {
     createCanvas(720, 400);
     FLOOR_POS_Y = height*0.9;
@@ -24,11 +23,11 @@ function draw() {
 
     obstaculosHandler.update();
 
-    player.update(walls.walls[0]);
+    player.update(obstaculosHandler.getFirstObstaculo());
 
     if(player.isDead){
         player.isDead = false;
-        obstaculosHandler.removeWalls();
+        obstaculosHandler.removeObstaculos();
     }
 
 }

@@ -62,11 +62,7 @@ function Player() {
             return;
         }
 
-        if(this.posicaoY + this.altura <= obstaculo.posicaoY && this.posicaoY <= obstaculo.posicaoY + obstaculo.altura){
-            return;
-        }
-
-        if(this.posicaoY + this.altura >= obstaculo.posicaoY && this.posicaoY >= obstaculo.posicaoY + obstaculo.altura){
+        if(this.posicaoY + this.altura <= obstaculo.posicaoY || this.posicaoY >= obstaculo.posicaoY + obstaculo.altura){
             return;
         }
 
